@@ -1,0 +1,169 @@
+<template>
+  <div id="random" v-if="currentRoute === 'Random'">
+    <div id="stack">
+      <div
+        class="current tune"
+        v-bind:style="style"
+        v-hammer:pan="onPan"
+        v-hammer:panend="onPanEnd"
+      >
+        <div class="title">{{ shuffledTunes[0].title }}</div>
+        <div class="detail">
+          {{ shuffledTunes[0].composer }} ({{ shuffledTunes[0].year }})
+        </div>
+      </div>
+      <div class="next tune">
+        <div class="title">{{ shuffledTunes[1].title }}</div>
+        <div class="detail">
+          {{ shuffledTunes[1].composer }} ({{ shuffledTunes[1].year }})
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapState, mapActions } from "vuex";
+// import { TweenLite } from "gsap";
+
+export default {
+  name: "Random",
+  computed: {
+    ...mapState({
+      setlist: state => state.setlist,
+      shuffledTunes: state => state.shuffledTunes,
+      currentRoute: state => state.currentRoute
+    })
+  },
+  methods: {
+    ...mapActions(["addToSetlist", "deleteFirstShuffledTune"]),
+    onPan(e) {
+      this.style = {
+        top: String(e.deltaY) + "px",
+        left: String(e.deltaX) + "px"
+      };
+    },
+    onPanEnd(e) {
+      if (Math.abs(e.deltaX) < 100) {
+        // TweenLite.to(this.style, { top: "0px", left: "0px" }, 100);
+        this.resetOffsets();
+      } else {
+        if (e.deltaX > 0) {
+          this.addToSetlist(this.shuffledTunes[0]);
+        }
+        this.deleteFirstShuffledTune();
+        this.resetOffsets();
+      }
+    },
+    resetOffsets() {
+      this.style = {
+        top: "0",
+        left: "0"
+      };
+    }
+  },
+  data() {
+    return {
+      style: {
+        top: "0",
+        left: "0"
+      }
+    };
+  }
+};
+</script>
+
+<style scoped>
+#random {
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
+  height: calc(80vh - var(--header-height-mobile));
+}
+@media (min-width: 480px) {
+  #random {
+    height: calc(100vh - var(--header-height-wide));
+  }
+}
+
+#stack {
+  position: absolute;
+  top: calc(60vh - var(--header-height-mobile) - 12em);
+  left: 6.25%;
+}
+
+.tune {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  min-height: 12em;
+  min-width: 17em;
+  max-width: 75%;
+  text-align: center;
+  user-select: none;
+  padding: 6vh 8.5vw;
+}
+@media (min-width: 415px) {
+  .tune {
+    padding: 8vh 8vw;
+    max-width: 400px;
+  }
+}
+
+.tune .title {
+  padding-bottom: 0.2em;
+  font-size: 1.875em;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.05em;
+}
+
+.tune .detail {
+  font-size: 1.0625em;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
+.tune.current {
+  z-index: 2;
+}
+.tune.next {
+  z-index: 1;
+}
+
+#buttons {
+  display: flex;
+  justify-content: center;
+}
+
+#yes {
+  margin-left: 20vw;
+  border: 2px solid green;
+  border-radius: 50%;
+  padding: 6vh;
+  color: green;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+#yes:hover {
+  cursor: pointer;
+}
+
+#no {
+  border: 2px solid red;
+  border-radius: 50%;
+  padding: 6vh;
+  color: red;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+#no:hover {
+  cursor: pointer;
+}
+</style>

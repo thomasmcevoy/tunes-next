@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo ""
+echo "--------------------------------------------------------------------------------"
+echo "Deploying app with the following commit message:"
+echo "'$1'"
+echo "--------------------------------------------------------------------------------"
+
+git add .
+git commit -m "$1"
+git push
+
+npm run deploy
