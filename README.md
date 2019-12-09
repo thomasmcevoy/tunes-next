@@ -1,3 +1,3 @@
-# tunes
+# Tunes
 
 Tunes webapp built with vuejs
