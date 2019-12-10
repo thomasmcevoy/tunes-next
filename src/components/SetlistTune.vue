@@ -65,13 +65,19 @@ export default {
 </script>
 
 <style scoped>
+.setlist-tune-container,
+.setlist-tune,
+.setlist-tune .title,
+.setlist-tune .detail {
+  touch-action: pan-y !important;
+}
+
 .setlist-tune-container {
   position: relative;
   margin-bottom: 1px;
   max-height: 100px;
   background-color: red;
   transition: max-height 150ms 150ms;
-  touch-action: pan-y !important;
 }
 .setlist-tune-container:hover {
   cursor: pointer;
@@ -92,7 +98,6 @@ export default {
 @media (min-width: 500px) {
   .setlist-tune {
     padding: 1.125em 2.75vw;
-    touch-action: pan-y !important;
   }
 }
 .setlist-tune.is-panning {
@@ -106,12 +111,10 @@ export default {
   font-weight: 500;
   line-height: 1.4;
   letter-spacing: -0.05em;
-  touch-action: pan-y !important;
 }
 
 .setlist-tune .detail {
   font-size: 0.75em;
-  touch-action: pan-y !important;
 }
 
 .x-container {
