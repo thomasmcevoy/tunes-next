@@ -150,6 +150,7 @@ export default {
 }
 
 #back {
+  z-index: 1000;
   position: fixed;
   left: 0;
   bottom: 0;
