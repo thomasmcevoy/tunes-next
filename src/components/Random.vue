@@ -20,7 +20,8 @@
       </div>
     </div>
     <div id="back" v-if="discarded.length > 0" @click="backtrack">
-      &lt; BACK
+      &lt; backtrack
+      <span v-for="tune in discarded" v-bind:key="tune.title">. </span>
     </div>
   </div>
 </template>

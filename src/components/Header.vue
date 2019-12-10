@@ -4,17 +4,17 @@
       <a
         v-bind:class="{ active: currentRoute === 'Random' }"
         @click="handleClick('Random')"
-        >Random</a
+        >random</a
       >
       <a
         v-bind:class="{ active: currentRoute === 'Tunes' }"
         @click="handleClick('Tunes')"
-        >Tunes</a
+        >tunes</a
       >
       <a
         v-bind:class="{ active: currentRoute === 'Setlist' }"
         @click="handleClick('Setlist')"
-        >Setlist</a
+        >setlist</a
       >
     </div>
     <svg class="menu-button" viewBox="0 0 26 26" @click="openMenu()">
@@ -60,27 +60,6 @@ header {
   }
 }
 
-header a {
-  padding-top: 0.5vw;
-  color: var(--header-inactive-color);
-  font-size: 1.25em;
-  font-weight: 500;
-  letter-spacing: 0em;
-  text-decoration: none;
-  -webkit-tap-highlight-color: transparent;
-}
-header a.active {
-  font-weight: 700;
-  color: var(--header-active-color);
-  letter-spacing: -0.02em;
-}
-header a:hover {
-  cursor: pointer;
-}
-header a.active:hover {
-  cursor: default;
-}
-
 #router {
   display: flex;
   justify-content: space-evenly;
@@ -100,5 +79,26 @@ header a.active:hover {
   #router {
     justify-content: space-around;
   }
+}
+
+#router a {
+  padding-top: 0.5vw;
+  color: var(--header-inactive-color);
+  font-size: 1em;
+  font-weight: 100;
+  letter-spacing: 0.075em;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+#router a.active {
+  font-weight: 500;
+  color: var(--header-active-color);
+  letter-spacing: 0.05em;
+}
+#router a:hover {
+  cursor: pointer;
+}
+#router a.active:hover {
+  cursor: default;
 }
 </style>
