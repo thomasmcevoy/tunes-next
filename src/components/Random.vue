@@ -19,13 +19,15 @@
         </div>
       </div>
     </div>
+    <div id="back" v-if="discarded.length > 0" @click="backtrack">
+      &lt; BACK
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
 // import { TweenLite } from "gsap";
-import Shake from "shake.js";
 
 export default {
   name: "Random",
@@ -76,16 +78,11 @@ export default {
         top: "0",
         left: "0"
       };
-    }
-  },
-  created() {
-    const shakeEvent = new Shake({ threshold: 15 });
-    shakeEvent.start();
-    window.addEventListener("shake", () => {
+    },
+    backtrack() {
       const tune = this.discarded.pop();
       this.addToShuffledTunes(tune);
-      alert("got shook");
-    });
+    }
   }
 };
 </script>
@@ -133,16 +130,16 @@ export default {
 
 .tune .title {
   padding-bottom: 0.2em;
-  font-size: 1.875em;
+  font-size: 1.825em;
   font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.05em;
+  line-height: 1.1;
+  letter-spacing: -0.0175em;
 }
 
 .tune .detail {
-  font-size: 0.85em;
+  font-size: 1.0625em;
   line-height: 1.3;
-  letter-spacing: 0.033em;
+  letter-spacing: 0.02em;
 }
 
 .tune.current {
@@ -152,35 +149,19 @@ export default {
   z-index: 1;
 }
 
-#buttons {
-  display: flex;
-  justify-content: center;
-}
-
-#yes {
-  margin-left: 20vw;
-  border: 2px solid green;
-  border-radius: 50%;
-  padding: 6vh;
-  color: green;
+#back {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  margin: 0.67em;
+  padding: 0.67em;
+  color: #aaa;
+  font-size: 0.925em;
   font-weight: bold;
-  letter-spacing: 0.05em;
-  user-select: none;
+  letter-spacing: 0.0175em;
 }
-#yes:hover {
-  cursor: pointer;
-}
-
-#no {
-  border: 2px solid red;
-  border-radius: 50%;
-  padding: 6vh;
-  color: red;
-  font-weight: bold;
-  letter-spacing: 0.05em;
-  user-select: none;
-}
-#no:hover {
+#back:hover,
+#back:active {
   cursor: pointer;
 }
 </style>

@@ -107,7 +107,7 @@ export default new Vuex.Store({
       state.setlist.splice(index, 1);
     },
     addToShuffledTunes(state, tune) {
-      state.shuffledTunes.push(tune);
+      state.shuffledTunes.unshift(tune);
     },
     deleteFirstShuffledTune(state) {
       state.shuffledTunes.shift();
@@ -156,6 +156,9 @@ export default new Vuex.Store({
     },
     closeMenu({ commit }) {
       commit("closeMenu");
+    },
+    addToShuffledTunes({ commit }, tune) {
+      commit("addToShuffledTunes", tune);
     },
     deleteFirstShuffledTune({ commit }) {
       commit("deleteFirstShuffledTune");
