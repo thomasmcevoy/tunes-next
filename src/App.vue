@@ -75,7 +75,7 @@ main {
   position: absolute;
   top: 0;
   right: 0;
-  padding: calc(var(--header-height-mobile) / 4);
+  padding: calc(var(--header-height-mobile) / 5);
   height: var(--header-height-mobile);
   width: var(--header-height-mobile);
   color: var(--header-inactive-color);
@@ -83,7 +83,7 @@ main {
 }
 @media (min-width: 480px) {
   .menu-button {
-    padding: calc(var(--header-height-wide) / 4);
+    padding: calc(var(--header-height-wide) / 5);
     height: var(--header-height-wide);
     width: var(--header-height-wide);
   }

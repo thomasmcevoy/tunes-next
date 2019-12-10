@@ -101,4 +101,6 @@ header {
 #router a.active:hover {
   cursor: default;
 }
+
+/* .menu-button { in App.vue } */
 </style>
