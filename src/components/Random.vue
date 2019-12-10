@@ -96,7 +96,7 @@ export default {
 }
 @media (min-width: 480px) {
   #random {
-    height: calc(100vh - var(--header-height-wide));
+    height: calc(100% - var(--header-height-wide));
   }
 }
 
@@ -153,12 +153,12 @@ export default {
   position: absolute;
   left: 0;
   bottom: 0;
-  margin: 0.67em;
-  padding: 0.67em;
+  margin: 0.5em;
+  padding: 0.5em;
   color: #aaa;
-  font-size: 0.925em;
   font-weight: bold;
-  letter-spacing: 0.0175em;
+  font-size: 0.75em;
+  letter-spacing: 0.06em;
 }
 #back:hover,
 #back:active {
