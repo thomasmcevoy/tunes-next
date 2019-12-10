@@ -82,7 +82,7 @@ header {
 }
 
 #router a {
-  padding-top: 0.5vw;
+  padding-top: 1vw;
   color: var(--header-inactive-color);
   font-size: 0.75em;
   font-weight: 400;
