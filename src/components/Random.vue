@@ -140,9 +140,9 @@ export default {
 }
 
 .tune .detail {
-  font-size: 1.0625em;
+  font-size: 0.85em;
   line-height: 1.3;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.033em;
 }
 
 .tune.current {
