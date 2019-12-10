@@ -76,16 +76,16 @@ export default {
         top: "0",
         left: "0"
       };
-    },
-    backtrack() {
-      const tune = this.discarded.pop();
-      this.addToShuffledTunes(tune);
     }
   },
   created() {
     const shakeEvent = new Shake({ threshold: 15 });
     shakeEvent.start();
-    window.addEventListener("shake", () => this.backtrack());
+    window.addEventListener("shake", () => {
+      const tune = this.discarded.pop();
+      this.addToShuffledTunes(tune);
+      alert("got shook");
+    });
   }
 };
 </script>
