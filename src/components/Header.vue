@@ -4,17 +4,17 @@
       <a
         v-bind:class="{ active: currentRoute === 'Random' }"
         @click="handleClick('Random')"
-        >random</a
+        >RANDOM</a
       >
       <a
         v-bind:class="{ active: currentRoute === 'Tunes' }"
         @click="handleClick('Tunes')"
-        >tunes</a
+        >TUNES</a
       >
       <a
         v-bind:class="{ active: currentRoute === 'Setlist' }"
         @click="handleClick('Setlist')"
-        >setlist</a
+        >SETLIST</a
       >
     </div>
     <svg class="menu-button" viewBox="0 0 26 26" @click="openMenu()">
@@ -84,16 +84,16 @@ header {
 #router a {
   padding-top: 0.5vw;
   color: var(--header-inactive-color);
-  font-size: 1.125em;
+  font-size: 0.75em;
   font-weight: 400;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.175em;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
 }
 #router a.active {
   font-weight: 700;
   color: var(--header-active-color);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.125em;
 }
 #router a:hover {
   cursor: pointer;
