@@ -92,7 +92,7 @@ export default {
   position: fixed;
   overflow: hidden;
   width: 100%;
-  height: calc(80vh - var(--header-height-mobile));
+  height: calc(100% - var(--header-height-mobile));
 }
 @media (min-width: 480px) {
   #random {
@@ -150,8 +150,7 @@ export default {
 }
 
 #back {
-  z-index: 1000;
-  position: fixed;
+  position: absolute;
   left: 0;
   bottom: 0;
   margin: 0.67em;
