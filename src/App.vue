@@ -36,7 +36,7 @@ export default {
 <style>
 :root {
   --header-height-wide: 66px;
-  --header-height-mobile: 14.5vw;
+  --header-height-mobile: 13vw;
   --header-active-color: #696969;
   --header-inactive-color: #b5b5b5;
   --outer-background-color: rgb(25, 46, 90);
