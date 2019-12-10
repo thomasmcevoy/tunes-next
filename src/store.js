@@ -11,6 +11,9 @@ Vue.config.productionTip = false;
 
 Vue.use(Vuex);
 Vue.use(VueHammer);
+VueHammer.config.swipe = {
+  direction: 6
+};
 
 const URL = "https://thomasmcevoy.github.io/tunes-api";
 

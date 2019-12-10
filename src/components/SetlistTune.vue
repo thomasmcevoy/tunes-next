@@ -40,6 +40,7 @@ export default {
   methods: {
     ...mapActions(["removeFromSetlist"]),
     onPanHorizontal(e) {
+      if (this.isScrolling) return;
       this.scrollLock();
       if (e.deltaX <= 0 && Math.abs(e.angle) > 150) {
         this.style = {
@@ -48,6 +49,7 @@ export default {
       }
     },
     onPanEnd(e) {
+      if (this.isScrolling) return;
       this.scrollUnlock();
       if (e.deltaX < -75 && Math.abs(e.angle) > 150) {
         this.removeFromSetlist(this.tune);
