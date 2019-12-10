@@ -106,6 +106,9 @@ export default new Vuex.Store({
       }
       state.setlist.splice(index, 1);
     },
+    addToShuffledTunes(state, tune) {
+      state.shuffledTunes.push(tune);
+    },
     deleteFirstShuffledTune(state) {
       state.shuffledTunes.shift();
     }

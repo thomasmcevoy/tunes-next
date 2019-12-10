@@ -25,6 +25,7 @@
 <script>
 import { mapState, mapActions } from "vuex";
 // import { TweenLite } from "gsap";
+import Shake from "shake.js";
 
 export default {
   name: "Random",
@@ -35,8 +36,21 @@ export default {
       currentRoute: state => state.currentRoute
     })
   },
+  data() {
+    return {
+      style: {
+        top: "0",
+        left: "0"
+      },
+      discarded: []
+    };
+  },
   methods: {
-    ...mapActions(["addToSetlist", "deleteFirstShuffledTune"]),
+    ...mapActions([
+      "addToSetlist",
+      "addToShuffledTunes",
+      "deleteFirstShuffledTune"
+    ]),
     onPan(e) {
       this.style = {
         top: String(e.deltaY) + "px",
@@ -44,13 +58,15 @@ export default {
       };
     },
     onPanEnd(e) {
+      const tune = this.shuffledTunes[0];
       if (Math.abs(e.deltaX) < 100) {
         // TweenLite.to(this.style, { top: "0px", left: "0px" }, 100);
         this.resetOffsets();
       } else {
         if (e.deltaX > 0) {
-          this.addToSetlist(this.shuffledTunes[0]);
+          this.addToSetlist(tune);
         }
+        this.discarded.push(tune);
         this.deleteFirstShuffledTune();
         this.resetOffsets();
       }
@@ -60,15 +76,16 @@ export default {
         top: "0",
         left: "0"
       };
+    },
+    backtrack() {
+      const tune = this.discarded.pop();
+      this.addToShuffledTunes(tune);
     }
   },
-  data() {
-    return {
-      style: {
-        top: "0",
-        left: "0"
-      }
-    };
+  created() {
+    const shakeEvent = new Shake({ threshold: 15 });
+    shakeEvent.start();
+    window.addEventListener("shake", () => this.backtrack());
   }
 };
 </script>
