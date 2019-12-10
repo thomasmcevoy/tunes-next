@@ -1,7 +1,7 @@
 <template>
-  <div id="setlist" v-if="currentRoute === 'Setlist'">
+  <div id="setlist" ref="setlist" v-if="currentRoute === 'Setlist'">
     <ul v-for="setlistTune in setlist" :key="setlistTune.title">
-      <SetlistTune :tune="setlistTune" />
+      <SetlistTune :tune="setlistTune" :scrollLock="scrollLock" :scrollUnlock="scrollUnlock" />
     </ul>
   </div>
 </template>
@@ -20,12 +20,26 @@ export default {
       setlist: state => state.setlist,
       currentRoute: state => state.currentRoute
     })
+  },
+  methods: {
+    scrollLock() {
+      const setlist = this.$refs.setlist;
+      if (!setlist.classList.contains("scrollLock")) {
+        setlist.classList.add("scrollLock");
+      }
+    },
+    scrollUnlock() {
+      const setlist = this.$refs.setlist;
+      if (setlist.classList.contains("scrollLock")) {
+        setlist.classList.remove("scrollLock");
+      }
+    }
   }
 };
 </script>
 
 <style scoped>
-#setlist {
+#setlist.scrollLock {
   overflow-y: hidden;
 }
 </style>

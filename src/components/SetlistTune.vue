@@ -21,25 +21,9 @@ import { mapActions, mapState } from "vuex";
 export default {
   name: "SetlistTune",
   props: {
-    tune: Object
-  },
-  methods: {
-    ...mapActions(["removeFromSetlist"]),
-    onPanHorizontal(e) {
-      if (e.deltaX <= 0 && Math.abs(e.angle) > 150) {
-        this.style = { left: e.deltaX + "px" };
-      }
-    },
-    onPanEnd(e) {
-      if (e.deltaX < -75 && Math.abs(e.angle) > 150) {
-        this.removeFromSetlist(this.tune);
-      } else {
-        this.resetOffset();
-      }
-    },
-    resetOffset() {
-      this.style.left = "0";
-    }
+    tune: Object,
+    scrollLock: Function,
+    scrollUnlock: Function
   },
   computed: {
     ...mapState({
@@ -52,6 +36,28 @@ export default {
         left: "0"
       }
     };
+  },
+  methods: {
+    ...mapActions(["removeFromSetlist"]),
+    onPanHorizontal(e) {
+      this.scrollLock();
+      if (e.deltaX <= 0 && Math.abs(e.angle) > 150) {
+        this.style = {
+          left: e.deltaX + "px"
+        };
+      }
+    },
+    onPanEnd(e) {
+      this.scrollUnlock();
+      if (e.deltaX < -75 && Math.abs(e.angle) > 150) {
+        this.removeFromSetlist(this.tune);
+      } else {
+        this.resetOffset();
+      }
+    },
+    resetOffset() {
+      this.style.left = "0";
+    }
   }
 };
 </script>
