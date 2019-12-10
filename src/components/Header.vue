@@ -84,14 +84,14 @@ header {
 #router a {
   padding-top: 0.5vw;
   color: var(--header-inactive-color);
-  font-size: 1em;
-  font-weight: 100;
-  letter-spacing: 0.075em;
+  font-size: 1.125em;
+  font-weight: 400;
+  letter-spacing: 0.1em;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
 }
 #router a.active {
-  font-weight: 500;
+  font-weight: 700;
   color: var(--header-active-color);
   letter-spacing: 0.05em;
 }
