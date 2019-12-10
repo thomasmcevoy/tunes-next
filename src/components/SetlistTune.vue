@@ -91,6 +91,7 @@ export default {
 @media (min-width: 500px) {
   .setlist-tune {
     padding: 1.125em 2.75vw;
+    touch-action: pan-y !important;
   }
 }
 .setlist-tune.is-panning {

@@ -11,7 +11,8 @@ Vue.config.productionTip = false;
 
 Vue.use(Vuex);
 Vue.use(VueHammer);
-VueHammer.config.swipe = {
+console.log(VueHammer.config);
+VueHammer.config.pan = {
   direction: 6
 };
 
