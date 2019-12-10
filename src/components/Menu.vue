@@ -78,6 +78,7 @@ export default {
   left: 0;
   padding-bottom: var(--header-height-mobile);
   width: 100%;
+  height: 100%;
   background-color: var(--inner-background-color);
   color: #222;
   transition: 0.2s all;
