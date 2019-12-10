@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "SetlistTune",
@@ -24,11 +24,6 @@ export default {
     tune: Object,
     scrollLock: Function,
     scrollUnlock: Function
-  },
-  computed: {
-    ...mapState({
-      isScrolling: state => state.isScrolling
-    })
   },
   data() {
     return {
@@ -69,6 +64,7 @@ export default {
 .setlist-tune,
 .setlist-tune .title,
 .setlist-tune .detail {
+  user-select: none;
   touch-action: pan-y !important;
 }
 
@@ -90,7 +86,6 @@ export default {
   position: relative;
   padding: 3.5vw 2.75vw;
   page-break-inside: avoid;
-  user-select: none;
   background-color: white;
   transition: transform 150ms;
   -webkit-tap-highlight-color: transparent;

@@ -11,10 +11,6 @@ Vue.config.productionTip = false;
 
 Vue.use(Vuex);
 Vue.use(VueHammer);
-console.log(VueHammer.config);
-VueHammer.config.pan = {
-  direction: 6
-};
 
 const URL = "https://thomasmcevoy.github.io/tunes-api";
 
@@ -26,7 +22,6 @@ export default new Vuex.Store({
     filter: "All",
     sortBy: "Title",
     menuIsOpen: false,
-    isScrolling: false,
     currentRoute: "Tunes"
   },
   getters: {
@@ -96,9 +91,6 @@ export default new Vuex.Store({
     setSortBy(state, sortBy) {
       state.sortBy = sortBy;
     },
-    setIsScrolling(state, isScrolling) {
-      state.isScrolling = isScrolling;
-    },
     openMenu(state) {
       state.menuIsOpen = true;
     },
@@ -152,9 +144,6 @@ export default new Vuex.Store({
     },
     setSortBy({ commit }, sortBy) {
       commit("setSortBy", sortBy);
-    },
-    setIsScrolling({ commit }, isScrolling) {
-      commit("isScrolling", isScrolling);
     },
     addToSetlist({ commit }, tune, index) {
       commit("addToSetlist", tune, index);
