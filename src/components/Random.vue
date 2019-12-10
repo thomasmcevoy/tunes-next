@@ -7,13 +7,17 @@
         v-hammer:pan="onPan"
         v-hammer:panend="onPanEnd"
       >
-        <div class="title">{{ shuffledTunes[0].title }}</div>
+        <div class="title">
+          {{ shuffledTunes[0].title }}
+        </div>
         <div class="detail">
           {{ shuffledTunes[0].composer }} ({{ shuffledTunes[0].year }})
         </div>
       </div>
       <div class="next tune">
-        <div class="title">{{ shuffledTunes[1].title }}</div>
+        <div class="title">
+          {{ shuffledTunes[1].title }}
+        </div>
         <div class="detail">
           {{ shuffledTunes[1].composer }} ({{ shuffledTunes[1].year }})
         </div>
@@ -68,8 +72,9 @@ export default {
       } else {
         if (e.deltaX > 0) {
           this.addToSetlist(tune);
+        } else {
+          this.discarded.push(tune);
         }
-        this.discarded.push(tune);
         this.deleteFirstShuffledTune();
         this.resetOffsets();
       }
