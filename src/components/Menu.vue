@@ -93,18 +93,16 @@ export default {
   position: absolute;
   top: 0;
   right: 0;
-  padding-top: calc(var(--header-height-mobile) / 3);
-  padding-right: calc(var(--header-height-mobile) / 3);
-  height: 100%;
+  height: var(--header-height-mobile);
+  width: var(--header-height-mobile);
   color: var(--header-inactive-color);
-  font-size: calc(var(--header-height-mobile) / 1.25);
-  line-height: 0.6;
+  font-size: 2em;
   -webkit-tap-highlight-color: transparent;
 }
 @media (min-width: 480px) {
   .menu-button {
-    padding: calc(var(--header-height-wide) / 5);
-    font-size: calc(var(--header-height-wide) / 1.25);
+    height: var(--header-height-wide);
+    width: var(--header-height-wide);
   }
 }
 .menu-button:hover {

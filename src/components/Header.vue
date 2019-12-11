@@ -8,11 +8,13 @@
         @click="handleClick('Setlist')"
       >SETLIST</a>
     </div>
-    <svg class="menu-button" viewBox="0 0 26 26" @click="openMenu()">
+    <div class="menu-button" @click="openMenu()">lll</div>
+    <!-- ☰</div> -->
+    <!-- <svg class="menu-button" viewBox="0 0 26 26" @click="openMenu()">
       <path
         d="M 0 4 L 0 6 L 26 6 L 26 4 Z M 0 12 L 0 14 L 26 14 L 26 12 Z M 0 20 L 0 22 L 26 22 L 26 20 Z "
       />
-    </svg>
+    </svg>-->
   </header>
 </template>
 
@@ -95,12 +97,13 @@ header {
 }
 
 .menu-button {
-  padding: calc(var(--header-height-mobile) / 5)
-    calc(var(--header-height-mobile) / 2.5)
-    calc(var(--header-height-mobile) / 5) 0;
-  height: 100%;
+  height: var(--header-height-mobile);
+  width: var(--header-height-mobile);
+  font-size: 2em;
+  font-weight: 100;
   color: var(--header-inactive-color);
   -webkit-tap-highlight-color: transparent;
+  transform: rotate(90deg);
 }
 @media (min-width: 480px) {
   .menu-button {
