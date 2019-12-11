@@ -7,26 +7,15 @@
         v-hammer:pan="onPan"
         v-hammer:panend="onPanEnd"
       >
-        <div class="title">
-          {{ shuffledTunes[0].title }}
-        </div>
-        <div class="detail">
-          {{ shuffledTunes[0].composer }} ({{ shuffledTunes[0].year }})
-        </div>
+        <div class="title">{{ shuffledTunes[0].title }}</div>
+        <div class="detail">{{ shuffledTunes[0].composer }} ({{ shuffledTunes[0].year }})</div>
       </div>
       <div class="next tune">
-        <div class="title">
-          {{ shuffledTunes[1].title }}
-        </div>
-        <div class="detail">
-          {{ shuffledTunes[1].composer }} ({{ shuffledTunes[1].year }})
-        </div>
+        <div class="title">{{ shuffledTunes[1].title }}</div>
+        <div class="detail">{{ shuffledTunes[1].composer }} ({{ shuffledTunes[1].year }})</div>
       </div>
     </div>
-    <div id="back" v-if="discarded.length > 0" @click="backtrack">
-      &lt; backtrack
-      <span v-for="tune in discarded" v-bind:key="tune.title">. </span>
-    </div>
+    <div id="back" v-if="discarded.length > 0" @click="backtrack">&lt; back</div>
   </div>
 </template>
 

@@ -1,28 +1,16 @@
 <template>
-  <div
-    id="menu"
-    v-bind:class="{ isOpen: menuIsOpen }"
-    v-hammer:swipe.up="closeMenu"
-  >
+  <div id="menu" v-bind:class="{ isOpen: menuIsOpen }" v-hammer:swipe.up="closeMenu">
     <div class="menu-button" @click="closeMenu()">×</div>
     <section>
       <h2>Sort</h2>
       <ul>
-        <MenuItemSort
-          :sortBy="sortBy"
-          v-bind:key="sortBy"
-          v-for="sortBy in sortBys"
-        />
+        <MenuItemSort :sortBy="sortBy" v-bind:key="sortBy" v-for="sortBy in sortBys" />
       </ul>
     </section>
     <section>
       <h2>Filter</h2>
       <ul>
-        <MenuItemFilter
-          :filter="filter"
-          v-bind:key="filter"
-          v-for="filter in filters"
-        />
+        <MenuItemFilter :filter="filter" v-bind:key="filter" v-for="filter in filters" />
       </ul>
     </section>
   </div>
@@ -102,13 +90,32 @@ export default {
 }
 
 .menu-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: calc(var(--header-height-mobile) / 5)
+    calc(var(--header-height-mobile) / 2.5)
+    calc(var(--header-height-mobile) / 5) 0;
+  height: 100%;
+  color: var(--header-inactive-color);
   font-size: calc(var(--header-height-mobile) / 1.25);
   line-height: 0.6;
+  -webkit-tap-highlight-color: transparent;
 }
 @media (min-width: 480px) {
   .menu-button {
+    padding: calc(var(--header-height-wide) / 5);
     font-size: calc(var(--header-height-wide) / 1.25);
   }
+}
+.menu-button:hover {
+  cursor: pointer;
+}
+.menu-button path {
+  fill: var(--header-inactive-color);
+}
+.menu-button.active path {
+  fill: var(--header-active-color);
 }
 
 .menu-item {

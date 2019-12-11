@@ -1,26 +1,17 @@
 <template>
   <header>
     <div id="router">
-      <a
-        v-bind:class="{ active: currentRoute === 'Random' }"
-        @click="handleClick('Random')"
-        >RANDOM</a
-      >
-      <a
-        v-bind:class="{ active: currentRoute === 'Tunes' }"
-        @click="handleClick('Tunes')"
-        >TUNES</a
-      >
+      <a v-bind:class="{ active: currentRoute === 'Random' }" @click="handleClick('Random')">RANDOM</a>
+      <a v-bind:class="{ active: currentRoute === 'Tunes' }" @click="handleClick('Tunes')">TUNES</a>
       <a
         v-bind:class="{ active: currentRoute === 'Setlist' }"
         @click="handleClick('Setlist')"
-        >SETLIST</a
-      >
+      >SETLIST</a>
     </div>
     <svg class="menu-button" viewBox="0 0 26 26" @click="openMenu()">
       <path
         d="M 0 4 L 0 6 L 26 6 L 26 4 Z M 0 12 L 0 14 L 26 14 L 26 12 Z M 0 20 L 0 22 L 26 22 L 26 20 Z "
-      ></path>
+      />
     </svg>
   </header>
 </template>
@@ -51,6 +42,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
+  display: flex;
   height: var(--header-height-mobile);
   background-color: var(--inner-background-color);
 }
@@ -64,8 +56,8 @@ header {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  flex-grow: 1;
   height: 100%;
-  width: calc(100% - calc(var(--header-height-mobile)) * 0.8);
   max-width: 768px;
   text-align: center;
   list-style-type: none;
@@ -86,14 +78,14 @@ header {
   color: var(--header-inactive-color);
   font-size: 0.75em;
   font-weight: 400;
-  letter-spacing: 0.175em;
+  letter-spacing: 0.167em;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
 }
 #router a.active {
   font-weight: 700;
   color: var(--header-active-color);
-  letter-spacing: 0.125em;
+  letter-spacing: 0.1em;
 }
 #router a:hover {
   cursor: pointer;
@@ -102,5 +94,28 @@ header {
   cursor: default;
 }
 
-/* .menu-button { in App.vue } */
+.menu-button {
+  padding: calc(var(--header-height-mobile) / 5)
+    calc(var(--header-height-mobile) / 2.5)
+    calc(var(--header-height-mobile) / 5) 0;
+  height: 100%;
+  color: var(--header-inactive-color);
+  -webkit-tap-highlight-color: transparent;
+}
+@media (min-width: 480px) {
+  .menu-button {
+    padding: calc(var(--header-height-wide) / 5);
+    height: var(--header-height-wide);
+    width: var(--header-height-wide);
+  }
+}
+.menu-button:hover {
+  cursor: pointer;
+}
+.menu-button path {
+  fill: var(--header-inactive-color);
+}
+.menu-button.active path {
+  fill: var(--header-active-color);
+}
 </style>

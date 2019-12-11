@@ -71,33 +71,6 @@ main {
   }
 }
 
-.menu-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: calc(var(--header-height-mobile) / 5);
-  height: var(--header-height-mobile);
-  width: var(--header-height-mobile);
-  color: var(--header-inactive-color);
-  -webkit-tap-highlight-color: transparent;
-}
-@media (min-width: 480px) {
-  .menu-button {
-    padding: calc(var(--header-height-wide) / 5);
-    height: var(--header-height-wide);
-    width: var(--header-height-wide);
-  }
-}
-.menu-button:hover {
-  cursor: pointer;
-}
-.menu-button path {
-  fill: var(--header-inactive-color);
-}
-.menu-button.active path {
-  fill: var(--header-active-color);
-}
-
 ol,
 ul {
   margin: 0;
