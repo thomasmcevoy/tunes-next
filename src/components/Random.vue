@@ -148,11 +148,11 @@ export default {
   position: absolute;
   left: 0;
   bottom: 0;
-  margin: 0.5em;
-  padding: 0.5em;
+  margin: 0.67em;
+  padding: 0.67em;
   color: var(--header-inactive-color);
   font-weight: 400;
-  font-size: 0.75em;
+  font-size: 0.8125em;
   letter-spacing: 0.125em;
 }
 #back:hover,
