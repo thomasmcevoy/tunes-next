@@ -76,6 +76,8 @@ header {
 }
 
 #router a {
+  position: relative;
+  left: 1vw;
   padding-top: 1vw;
   color: var(--header-inactive-color);
   font-size: 0.8125em;
@@ -97,17 +99,17 @@ header {
 }
 
 .menu-button {
+  z-index: 10;
   height: var(--header-height-mobile);
   width: var(--header-height-mobile);
   font-size: 2em;
   font-weight: 100;
   color: var(--header-inactive-color);
   -webkit-tap-highlight-color: transparent;
-  transform: rotate(90deg);
+  transform: rotate(270deg);
 }
 @media (min-width: 480px) {
   .menu-button {
-    padding: calc(var(--header-height-wide) / 5);
     height: var(--header-height-wide);
     width: var(--header-height-wide);
   }
