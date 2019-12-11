@@ -152,7 +152,7 @@ export default {
   padding: 0.5em;
   color: var(--header-inactive-color);
   font-weight: 400;
-  font-size: 0.675em;
+  font-size: 0.75em;
   letter-spacing: 0.125em;
 }
 #back:hover,

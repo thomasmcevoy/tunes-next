@@ -76,9 +76,9 @@ header {
 #router a {
   padding-top: 1vw;
   color: var(--header-inactive-color);
-  font-size: 0.75em;
+  font-size: 0.8125em;
   font-weight: 400;
-  letter-spacing: 0.167em;
+  letter-spacing: 0.15em;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
 }
