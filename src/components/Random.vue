@@ -150,13 +150,17 @@ export default {
   bottom: 0;
   margin: 0.5em;
   padding: 0.5em;
-  color: #aaa;
-  font-weight: bold;
-  font-size: 0.75em;
-  letter-spacing: 0.06em;
+  color: var(--header-inactive-color);
+  font-weight: 400;
+  font-size: 0.675em;
+  letter-spacing: 0.125em;
 }
 #back:hover,
 #back:active {
   cursor: pointer;
+}
+#back:active {
+  font-weight: 700;
+  color: var(--header-active-color);
 }
 </style>
