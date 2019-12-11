@@ -93,9 +93,8 @@ export default {
   position: absolute;
   top: 0;
   right: 0;
-  padding: calc(var(--header-height-mobile) / 5)
-    calc(var(--header-height-mobile) / 2.5)
-    calc(var(--header-height-mobile) / 5) 0;
+  padding-top: calc(var(--header-height-mobile) / 3);
+  padding-right: calc(var(--header-height-mobile) / 3);
   height: 100%;
   color: var(--header-inactive-color);
   font-size: calc(var(--header-height-mobile) / 1.25);
