@@ -89,7 +89,7 @@ header {
 #router a.active {
   font-weight: 700;
   color: var(--header-active-color);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.075em;
 }
 #router a:hover {
   cursor: pointer;
@@ -99,13 +99,10 @@ header {
 }
 
 .menu-button {
-  z-index: 10;
   height: var(--header-height-mobile);
   width: var(--header-height-mobile);
   font-size: 2em;
-  font-weight: 100;
   color: var(--header-inactive-color);
-  -webkit-tap-highlight-color: transparent;
   transform: rotate(270deg);
 }
 @media (min-width: 480px) {

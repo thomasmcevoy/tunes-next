@@ -78,4 +78,11 @@ ul {
   padding: 0;
   list-style-type: none;
 }
+
+.menu-button {
+  z-index: 10;
+  font-weight: 100;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
 </style>
