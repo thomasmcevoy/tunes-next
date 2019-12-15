@@ -94,7 +94,7 @@ export default {
   top: 0;
   right: 0;
   height: var(--header-height-mobile);
-  width: var(--header-height-mobile);
+  width: 0.85em;
   color: var(--header-inactive-color);
   font-size: 2.75em;
   line-height: 1;
