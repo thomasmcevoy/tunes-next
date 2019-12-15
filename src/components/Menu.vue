@@ -96,8 +96,8 @@ export default {
   height: var(--header-height-mobile);
   width: var(--header-height-mobile);
   color: var(--header-inactive-color);
-  font-size: 3em;
-  line-height: 0.9;
+  font-size: 2.75em;
+  line-height: 1;
 }
 @media (min-width: 480px) {
   .menu-button {
