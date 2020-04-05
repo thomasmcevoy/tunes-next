@@ -7,12 +7,12 @@
         v-hammer:pan="onPan"
         v-hammer:panend="onPanEnd"
       >
-        <div class="title">{{ shuffledTunes[0].title }}</div>
-        <div class="detail">{{ shuffledTunes[0].composer }} ({{ shuffledTunes[0].year }})</div>
+        <div class="title">{{ tunes[0].title }}</div>
+        <div class="detail">{{ tunes[0].composer }} ({{ tunes[0].year }})</div>
       </div>
       <div class="next tune">
-        <div class="title">{{ shuffledTunes[1].title }}</div>
-        <div class="detail">{{ shuffledTunes[1].composer }} ({{ shuffledTunes[1].year }})</div>
+        <div class="title">{{ tunes[1].title }}</div>
+        <div class="detail">{{ tunes[1].composer }} ({{ tunes[1].year }})</div>
       </div>
     </div>
     <div id="back" v-if="discarded.length > 0" @click="backtrack">&lt; BACK</div>
@@ -20,33 +20,48 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 // import { TweenLite } from "gsap";
 
 export default {
   name: 'Random',
   computed: {
-    ...mapState({
-      setlist: state => state.setlist,
-      shuffledTunes: state => state.shuffledTunes,
-      currentRoute: state => state.currentRoute
-    })
+    ...mapGetters(['filteredTunes']),
+    ...mapState({ currentRoute: state => state.currentRoute })
   },
   data () {
     return {
+      tunes: [],
+      discarded: [],
       style: {
         top: '0',
         left: '0'
-      },
-      discarded: []
+      }
+    }
+  },
+  created () {
+    this.tunes = this.shuffle(this.filteredTunes)
+  },
+  watch: {
+    filteredTunes: function (newTunes, oldTunes) {
+      this.tunes = this.shuffle(newTunes)
+      this.discarded = []
     }
   },
   methods: {
-    ...mapActions([
-      'addToSetlist',
-      'addToShuffledTunes',
-      'deleteFirstShuffledTune'
-    ]),
+    ...mapActions(['addToSetlist']),
+    shuffle (tunes) {
+      const shuffledTunes = tunes.slice(0)
+      for (let i = shuffledTunes.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledTunes[i], shuffledTunes[j]] = [shuffledTunes[j], shuffledTunes[i]]
+      }
+      return shuffledTunes
+    },
+    backtrack () {
+      const tune = this.discarded.pop()
+      this.tunes.unshift(tune)
+    },
     onPan (e) {
       this.style = {
         top: String(e.deltaY) + 'px',
@@ -54,7 +69,7 @@ export default {
       }
     },
     onPanEnd (e) {
-      const tune = this.shuffledTunes[0]
+      const tune = this.tunes[0]
       if (Math.abs(e.deltaX) < 100) {
         // TweenLite.to(this.style, { top: "0px", left: "0px" }, 100);
         this.resetOffsets()
@@ -64,7 +79,7 @@ export default {
         } else {
           this.discarded.push(tune)
         }
-        this.deleteFirstShuffledTune()
+        this.tunes.shift()
         this.resetOffsets()
       }
     },
@@ -73,10 +88,6 @@ export default {
         top: '0',
         left: '0'
       }
-    },
-    backtrack () {
-      const tune = this.discarded.pop()
-      this.addToShuffledTunes(tune)
     }
   }
 }

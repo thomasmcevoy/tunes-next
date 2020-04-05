@@ -28,7 +28,6 @@ export default {
   },
   created () {
     this.$store.dispatch('loadTunes')
-    setTimeout(() => this.$store.dispatch('setShuffledTunes'), 1000)
   }
 }
 </script>
