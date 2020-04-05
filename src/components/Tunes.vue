@@ -15,67 +15,67 @@
 </template>
 
 <script>
-import Tune from "./Tune.vue";
-import Seekbar from "./Seekbar.vue";
-import { mapActions, mapGetters, mapState } from "vuex";
+import Tune from './Tune.vue'
+import Seekbar from './Seekbar.vue'
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 export default {
-  name: "Tunes",
+  name: 'Tunes',
   components: {
     Tune,
     Seekbar
   },
   methods: {
-    ...mapActions(["setMarkers"]),
-    getMarker(tune) {
-      if (this.sortBy === "Year") {
-        if (tune.year < 1900) return "< 1900";
+    ...mapActions(['setMarkers']),
+    getMarker (tune) {
+      if (this.sortBy === 'Year') {
+        if (tune.year < 1900) return '< 1900'
         else {
           return String(tune.year)
             .slice(0, -1)
-            .concat("0s");
+            .concat('0s')
         }
       } else {
-        const char = tune[this.sortBy.toLowerCase()][0];
-        if ("0123456789".includes(char)) return "#";
-        else return char;
+        const char = tune[this.sortBy.toLowerCase()][0]
+        if ('0123456789'.includes(char)) return '#'
+        else return char
       }
     }
   },
   computed: {
-    ...mapGetters(["sortedFilteredTunes"]),
+    ...mapGetters(['sortedFilteredTunes']),
     ...mapState({
       sortBy: state => state.sortBy,
       currentRoute: state => state.currentRoute
     }),
-    markers() {
-      let result = [];
+    markers () {
+      const result = []
       this.sortedFilteredTunes.forEach(tune => {
-        const currentMarker = this.getMarker(tune);
+        const currentMarker = this.getMarker(tune)
         if (result.indexOf(currentMarker) === -1) {
-          result.push(currentMarker);
+          result.push(currentMarker)
         }
-      });
-      return result;
+      })
+      return result
     },
-    groupedTunes() {
-      let result = [];
-      let currentMarker = "";
+    groupedTunes () {
+      const result = []
+      let currentMarker = ''
       this.sortedFilteredTunes.forEach(tune => {
-        const marker = this.getMarker(tune);
+        const marker = this.getMarker(tune)
         if (marker !== currentMarker) {
-          currentMarker = marker;
+          currentMarker = marker
           result.push({
             marker: currentMarker,
             tunes: []
-          });
+          })
         }
-        result[result.length - 1].tunes.push(tune);
-      });
-      return result;
+        result[result.length - 1].tunes.push(tune)
+      })
+      return result
     }
   }
-};
+}
 </script>
 
 <style scoped>

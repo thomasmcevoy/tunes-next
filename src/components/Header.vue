@@ -19,14 +19,14 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState } from 'vuex'
 
 export default {
-  name: "Header",
+  name: 'Header',
   methods: {
-    ...mapActions(["setRoute", "openMenu"]),
-    handleClick(route) {
-      this.setRoute(route);
+    ...mapActions(['setRoute', 'openMenu']),
+    handleClick (route) {
+      this.setRoute(route)
     }
   },
   computed: {
@@ -34,7 +34,7 @@ export default {
       currentRoute: state => state.currentRoute
     })
   }
-};
+}
 </script>
 
 <style scoped>

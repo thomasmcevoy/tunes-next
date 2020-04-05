@@ -16,47 +16,47 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex'
 
 export default {
-  name: "SetlistTune",
+  name: 'SetlistTune',
   props: {
     tune: Object,
     scrollLock: Function,
     scrollUnlock: Function
   },
-  data() {
+  data () {
     return {
       style: {
-        left: "0"
+        left: '0'
       }
-    };
+    }
   },
   methods: {
-    ...mapActions(["removeFromSetlist"]),
-    onPanHorizontal(e) {
-      if (this.isScrolling) return;
-      this.scrollLock();
+    ...mapActions(['removeFromSetlist']),
+    onPanHorizontal (e) {
+      if (this.isScrolling) return
+      this.scrollLock()
       if (e.deltaX <= 0 && Math.abs(e.angle) > 150) {
         this.style = {
-          left: e.deltaX + "px"
-        };
+          left: e.deltaX + 'px'
+        }
       }
     },
-    onPanEnd(e) {
-      if (this.isScrolling) return;
-      this.scrollUnlock();
+    onPanEnd (e) {
+      if (this.isScrolling) return
+      this.scrollUnlock()
       if (e.deltaX < -75 && Math.abs(e.angle) > 150) {
-        this.removeFromSetlist(this.tune);
+        this.removeFromSetlist(this.tune)
       } else {
-        this.resetOffset();
+        this.resetOffset()
       }
     },
-    resetOffset() {
-      this.style.left = "0";
+    resetOffset () {
+      this.style.left = '0'
     }
   }
-};
+}
 </script>
 
 <style scoped>

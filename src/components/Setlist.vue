@@ -7,11 +7,11 @@
 </template>
 
 <script>
-import SetlistTune from "./SetlistTune.vue";
-import { mapState } from "vuex";
+import SetlistTune from './SetlistTune.vue'
+import { mapState } from 'vuex'
 
 export default {
-  name: "Setlist",
+  name: 'Setlist',
   components: {
     SetlistTune
   },
@@ -22,20 +22,20 @@ export default {
     })
   },
   methods: {
-    scrollLock() {
-      const setlist = this.$refs.setlist;
-      if (!setlist.classList.contains("scrollLock")) {
-        setlist.classList.add("scrollLock");
+    scrollLock () {
+      const setlist = this.$refs.setlist
+      if (!setlist.classList.contains('scrollLock')) {
+        setlist.classList.add('scrollLock')
       }
     },
-    scrollUnlock() {
-      const setlist = this.$refs.setlist;
-      if (setlist.classList.contains("scrollLock")) {
-        setlist.classList.remove("scrollLock");
+    scrollUnlock () {
+      const setlist = this.$refs.setlist
+      if (setlist.classList.contains('scrollLock')) {
+        setlist.classList.remove('scrollLock')
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>

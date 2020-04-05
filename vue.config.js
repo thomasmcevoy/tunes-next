@@ -1,6 +1,6 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === "production" ? "/tunes/" : "/",
+  publicPath: process.env.NODE_ENV === 'production' ? '/tunes/' : '/',
   configureWebpack: {
-    devtool: "source-map"
+    devtool: 'source-map'
   }
-};
+}

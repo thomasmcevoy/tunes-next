@@ -9,22 +9,22 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState } from 'vuex'
 
 export default {
-  name: "MenuItemSort",
+  name: 'MenuItemSort',
   props: {
     sortBy: String
   },
   methods: {
-    ...mapActions(["setSortBy"])
+    ...mapActions(['setSortBy'])
   },
   computed: {
     ...mapState({
       currentSortBy: state => state.sortBy
     })
   }
-};
+}
 </script>
 
 <style scoped></style>

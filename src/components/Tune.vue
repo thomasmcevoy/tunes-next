@@ -10,10 +10,10 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState } from 'vuex'
 
 export default {
-  name: "Tune",
+  name: 'Tune',
   props: {
     tune: Object
   },
@@ -23,17 +23,17 @@ export default {
     })
   },
   methods: {
-    ...mapActions(["addToSetlist", "removeFromSetlist"]),
-    toggleSelected(tune) {
-      const index = this.setlist.indexOf(tune);
+    ...mapActions(['addToSetlist', 'removeFromSetlist']),
+    toggleSelected (tune) {
+      const index = this.setlist.indexOf(tune)
       if (index === -1) {
-        this.addToSetlist(tune);
+        this.addToSetlist(tune)
       } else {
-        this.removeFromSetlist(tune);
+        this.removeFromSetlist(tune)
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>

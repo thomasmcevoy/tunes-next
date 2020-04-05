@@ -11,14 +11,14 @@
 </template>
 
 <script>
-import Menu from "./components/Menu.vue";
-import Header from "./components/Header.vue";
-import Random from "./components/Random.vue";
-import Tunes from "./components/Tunes.vue";
-import Setlist from "./components/Setlist.vue";
+import Menu from './components/Menu.vue'
+import Header from './components/Header.vue'
+import Random from './components/Random.vue'
+import Tunes from './components/Tunes.vue'
+import Setlist from './components/Setlist.vue'
 
 export default {
-  name: "app",
+  name: 'app',
   components: {
     Menu,
     Header,
@@ -26,11 +26,11 @@ export default {
     Tunes,
     Setlist
   },
-  created() {
-    this.$store.dispatch("loadTunes");
-    setTimeout(() => this.$store.dispatch("setShuffledTunes"), 1000);
+  created () {
+    this.$store.dispatch('loadTunes')
+    setTimeout(() => this.$store.dispatch('setShuffledTunes'), 1000)
   }
-};
+}
 </script>
 
 <style>

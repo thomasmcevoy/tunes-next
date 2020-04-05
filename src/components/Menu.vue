@@ -17,45 +17,45 @@
 </template>
 
 <script>
-import MenuItemFilter from "./MenuItemFilter.vue";
-import MenuItemSort from "./MenuItemSort.vue";
-import { mapActions, mapState } from "vuex";
+import MenuItemFilter from './MenuItemFilter.vue'
+import MenuItemSort from './MenuItemSort.vue'
+import { mapActions, mapState } from 'vuex'
 
 export default {
-  name: "Menu",
+  name: 'Menu',
   components: {
     MenuItemSort,
     MenuItemFilter
   },
   methods: {
-    ...mapActions(["toggleMenu", "closeMenu"])
+    ...mapActions(['toggleMenu', 'closeMenu'])
   },
   computed: {
     ...mapState({
       menuIsOpen: state => state.menuIsOpen
     })
   },
-  data() {
+  data () {
     return {
-      sortBys: ["Title", "Composer", "Year"],
+      sortBys: ['Title', 'Composer', 'Year'],
       filters: [
-        "All",
-        "Jazz tunes",
-        "Standards",
-        "Blues",
-        "Rhythm",
-        "Ballads",
-        "Waltzes",
-        "Latin",
-        "Contrafacts",
-        "Minor",
-        "Miles",
-        "Sinatra",
-        "Holiday"
+        'All',
+        'Jazz tunes',
+        'Standards',
+        'Blues',
+        'Rhythm',
+        'Ballads',
+        'Waltzes',
+        'Latin',
+        'Contrafacts',
+        'Minor',
+        'Miles',
+        'Sinatra',
+        'Holiday'
       ]
-    };
+    }
   }
-};
+}
 </script>
 
 <style scoped>

@@ -9,22 +9,22 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState } from 'vuex'
 
 export default {
-  name: "MenuItemFilter",
+  name: 'MenuItemFilter',
   props: {
     filter: String
   },
   methods: {
-    ...mapActions(["setFilter"])
+    ...mapActions(['setFilter'])
   },
   computed: {
     ...mapState({
       currentFilter: state => state.filter
     })
   }
-};
+}
 </script>
 
 <style scoped></style>

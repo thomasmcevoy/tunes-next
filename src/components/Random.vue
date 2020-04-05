@@ -20,11 +20,11 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions } from 'vuex'
 // import { TweenLite } from "gsap";
 
 export default {
-  name: "Random",
+  name: 'Random',
   computed: {
     ...mapState({
       setlist: state => state.setlist,
@@ -32,54 +32,54 @@ export default {
       currentRoute: state => state.currentRoute
     })
   },
-  data() {
+  data () {
     return {
       style: {
-        top: "0",
-        left: "0"
+        top: '0',
+        left: '0'
       },
       discarded: []
-    };
+    }
   },
   methods: {
     ...mapActions([
-      "addToSetlist",
-      "addToShuffledTunes",
-      "deleteFirstShuffledTune"
+      'addToSetlist',
+      'addToShuffledTunes',
+      'deleteFirstShuffledTune'
     ]),
-    onPan(e) {
+    onPan (e) {
       this.style = {
-        top: String(e.deltaY) + "px",
-        left: String(e.deltaX) + "px"
-      };
-    },
-    onPanEnd(e) {
-      const tune = this.shuffledTunes[0];
-      if (Math.abs(e.deltaX) < 100) {
-        // TweenLite.to(this.style, { top: "0px", left: "0px" }, 100);
-        this.resetOffsets();
-      } else {
-        if (e.deltaX > 0) {
-          this.addToSetlist(tune);
-        } else {
-          this.discarded.push(tune);
-        }
-        this.deleteFirstShuffledTune();
-        this.resetOffsets();
+        top: String(e.deltaY) + 'px',
+        left: String(e.deltaX) + 'px'
       }
     },
-    resetOffsets() {
-      this.style = {
-        top: "0",
-        left: "0"
-      };
+    onPanEnd (e) {
+      const tune = this.shuffledTunes[0]
+      if (Math.abs(e.deltaX) < 100) {
+        // TweenLite.to(this.style, { top: "0px", left: "0px" }, 100);
+        this.resetOffsets()
+      } else {
+        if (e.deltaX > 0) {
+          this.addToSetlist(tune)
+        } else {
+          this.discarded.push(tune)
+        }
+        this.deleteFirstShuffledTune()
+        this.resetOffsets()
+      }
     },
-    backtrack() {
-      const tune = this.discarded.pop();
-      this.addToShuffledTunes(tune);
+    resetOffsets () {
+      this.style = {
+        top: '0',
+        left: '0'
+      }
+    },
+    backtrack () {
+      const tune = this.discarded.pop()
+      this.addToShuffledTunes(tune)
     }
   }
-};
+}
 </script>
 
 <style scoped>

@@ -19,78 +19,78 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from "vuex";
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 export default {
-  name: "Seekbar",
+  name: 'Seekbar',
   props: {
     markers: Array
   },
-  data() {
+  data () {
     return {
       isVisible: false,
-      lastTarget: ""
-    };
+      lastTarget: ''
+    }
   },
   computed: {
-    ...mapGetters(["sortedFilteredTunes"]),
+    ...mapGetters(['sortedFilteredTunes']),
     ...mapState({
       sortBy: state => state.sortBy
     }),
-    seekbarNode() {
-      return document.getElementById("seekbar-container");
+    seekbarNode () {
+      return document.getElementById('seekbar-container')
     },
-    seekbarTopOffset() {
-      return Math.floor(this.seekbarNode.getBoundingClientRect().top);
+    seekbarTopOffset () {
+      return Math.floor(this.seekbarNode.getBoundingClientRect().top)
     },
-    seekbarHeight() {
-      return this.seekbarNode.clientHeight;
+    seekbarHeight () {
+      return this.seekbarNode.clientHeight
     },
-    headerHeight() {
-      return document.getElementsByTagName("header")[0].clientHeight;
+    headerHeight () {
+      return document.getElementsByTagName('header')[0].clientHeight
     },
-    markerHeight() {
-      return this.seekbarHeight / this.markers.length;
+    markerHeight () {
+      return this.seekbarHeight / this.markers.length
     },
-    viewportHeight() {
+    viewportHeight () {
       return Math.max(
         document.documentElement.clientHeight,
         window.innerHeight || 0
-      );
+      )
     }
   },
   methods: {
-    ...mapActions(["toggleSelected"]),
-    shorten(marker) {
-      if (this.sortBy !== "Year") {
-        return marker;
-      } else if (marker === "< 1900") {
-        return "<";
+    ...mapActions(['toggleSelected']),
+    shorten (marker) {
+      if (this.sortBy !== 'Year') {
+        return marker
+      } else if (marker === '< 1900') {
+        return '<'
       } else {
-        return marker.slice(2, -1);
+        return marker.slice(2, -1)
       }
     },
-    handlePan(e) {
-      e.preventDefault();
-      const touchPosition = e.center.y - this.seekbarTopOffset;
-      const touchedMarkerIndex = Math.floor(touchPosition / this.markerHeight);
+    handlePan (e) {
+      e.preventDefault()
+      const touchPosition = e.center.y - this.seekbarTopOffset
+      const touchedMarkerIndex = Math.floor(touchPosition / this.markerHeight)
       const targetNode = document.getElementById(
         this.markers[touchedMarkerIndex]
-      );
-      const targetOffset = targetNode.offsetTop - this.headerHeight;
+      )
+      const targetOffset = targetNode.offsetTop - this.headerHeight
       if (targetNode !== this.lastTarget && !this.timeout) {
-        window.scrollTo(0, targetOffset);
-        this.lastTarget = targetNode;
+        window.scrollTo(0, targetOffset)
+        this.lastTarget = targetNode
       }
     },
-    handlePanStart() {
-      this.isVisible = true;
+    handlePanStart () {
+      this.isVisible = true
     },
-    handlePanEnd() {
-      this.isVisible = false;
+    handlePanEnd () {
+      this.isVisible = false
     }
   }
-};
+}
 </script>
 
 <style scoped>
