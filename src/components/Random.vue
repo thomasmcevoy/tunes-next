@@ -15,7 +15,7 @@
         <div class="detail">{{ shuffledTunes[1].composer }} ({{ shuffledTunes[1].year }})</div>
       </div>
     </div>
-    <div id="back" v-if="discarded.length > 0" @click="backtrack">&lt; back</div>
+    <div id="back" v-if="discarded.length > 0" @click="backtrack">&lt; BACK</div>
   </div>
 </template>
 
@@ -153,7 +153,7 @@ export default {
   color: var(--header-inactive-color);
   font-weight: 400;
   font-size: 0.8125em;
-  letter-spacing: 0.125em;
+  letter-spacing: 0.1em;
 }
 #back:hover,
 #back:active {
