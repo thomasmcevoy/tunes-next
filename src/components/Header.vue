@@ -1,8 +1,14 @@
 <template>
   <header>
     <div id="router">
-      <a v-bind:class="{ active: currentRoute === 'Random' }" @click="handleClick('Random')">RANDOM</a>
-      <a v-bind:class="{ active: currentRoute === 'Tunes' }" @click="handleClick('Tunes')">TUNES</a>
+      <a
+        v-bind:class="{ active: currentRoute === 'Random' }"
+        @click="handleClick('Random')"
+      >RANDOM</a>
+      <a
+        v-bind:class="{ active: currentRoute === 'Tunes' }"
+        @click="handleClick('Tunes')"
+      >TUNES</a>
       <a
         v-bind:class="{ active: currentRoute === 'Setlist' }"
         @click="handleClick('Setlist')"
@@ -82,7 +88,7 @@ header {
   color: var(--header-inactive-color);
   font-size: 0.8125em;
   font-weight: 400;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.125em;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
 }

@@ -163,8 +163,8 @@ export default {
   padding: 0.67em;
   color: var(--header-inactive-color);
   font-weight: 400;
-  font-size: 0.8125em;
-  letter-spacing: 0.1em;
+  font-size: 0.75em;
+  letter-spacing: 0.075em;
 }
 #back:hover,
 #back:active {
