@@ -15,7 +15,7 @@
         <div class="detail">{{ tunes[1].composer }} ({{ tunes[1].year }})</div>
       </div>
     </div>
-    <div id="back" v-if="discarded.length > 0" @click="backtrack">&lt; BACK</div>
+    <div id="back" v-if="discarded.length > 0" @click="goBack">&lt; BACK</div>
   </div>
 </template>
 
@@ -58,7 +58,7 @@ export default {
       }
       return shuffledTunes
     },
-    backtrack () {
+    goBack () {
       const tune = this.discarded.pop()
       this.tunes.unshift(tune)
     },
@@ -70,7 +70,7 @@ export default {
     },
     onPanEnd (e) {
       const tune = this.tunes[0]
-      if (Math.abs(e.deltaX) < 100) {
+      if (Math.abs(e.deltaX) < 75) {
         // TweenLite.to(this.style, { top: "0px", left: "0px" }, 100);
         this.resetOffsets()
       } else {
