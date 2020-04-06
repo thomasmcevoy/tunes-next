@@ -165,6 +165,7 @@ export default {
   font-weight: 400;
   font-size: 0.75em;
   letter-spacing: 0.075em;
+  user-select: none;
 }
 #back:hover,
 #back:active {
