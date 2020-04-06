@@ -70,7 +70,7 @@ export default {
     },
     onPanEnd (e) {
       const tune = this.tunes[0]
-      if (Math.abs(e.deltaX) < 75) {
+      if (Math.abs(e.deltaX) < 85) {
         // TweenLite.to(this.style, { top: "0px", left: "0px" }, 100);
         this.resetOffsets()
       } else {
