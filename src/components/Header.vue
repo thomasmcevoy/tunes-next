@@ -1,18 +1,9 @@
 <template>
   <header>
     <div id="router">
-      <a
-        v-bind:class="{ active: currentRoute === 'Random' }"
-        @click="handleClick('Random')"
-      >RANDOM</a>
-      <a
-        v-bind:class="{ active: currentRoute === 'Tunes' }"
-        @click="handleClick('Tunes')"
-      >TUNES</a>
-      <a
-        v-bind:class="{ active: currentRoute === 'Setlist' }"
-        @click="handleClick('Setlist')"
-      >SETLIST</a>
+      <a v-bind:class="{ active: currentRoute === 'Random' }" @click="handleClick('Random')">RANDOM</a>
+      <a v-bind:class="{ active: currentRoute === 'Tunes' }" @click="handleClick('Tunes')">TUNES</a>
+      <a v-bind:class="{ active: currentRoute === 'Setlist' }" @click="handleClick('Setlist')">SETLIST</a>
     </div>
     <div class="menu-button" @click="openMenu()">lll</div>
     <!-- ☰</div> -->

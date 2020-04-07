@@ -30,11 +30,7 @@ export default {
     getMarker (tune) {
       if (this.sortBy === 'Year') {
         if (tune.year < 1900) return '< 1900'
-        else {
-          return String(tune.year)
-            .slice(0, -1)
-            .concat('0s')
-        }
+        else return String(tune.year).slice(0, -1).concat('0s')
       } else {
         const char = tune[this.sortBy.toLowerCase()][0]
         if ('0123456789'.includes(char)) return '#'
