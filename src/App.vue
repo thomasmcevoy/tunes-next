@@ -1,16 +1,16 @@
 <template>
-  <div id="app">
-    <Menu />
-    <Header />
-    <main>
-      <Random />
-      <Tunes />
-      <Setlist />
-    </main>
-  </div>
+  <Menu />
+  <Header />
+  <main>
+    <Random />
+    <Tunes />
+    <Setlist />
+  </main>
 </template>
 
 <script>
+import { useStore } from 'vuex'
+import { onMounted } from 'vue'
 import Menu from './components/Menu.vue'
 import Header from './components/Header.vue'
 import Random from './components/Random.vue'
@@ -18,7 +18,6 @@ import Tunes from './components/Tunes.vue'
 import Setlist from './components/Setlist.vue'
 
 export default {
-  name: 'app',
   components: {
     Menu,
     Header,
@@ -26,8 +25,12 @@ export default {
     Tunes,
     Setlist
   },
-  created () {
-    this.$store.dispatch('loadTunes')
+  setup () {
+    const store = useStore()
+
+    onMounted(() => {
+      store.dispatch('loadTunes')
+    })
   }
 }
 </script>
@@ -51,14 +54,11 @@ body {
   border: 0;
   padding: 0;
   background-color: var(--inner-background-color);
-}
-
-#app {
+  color: #2c3e50;
+  text-align: center;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
 
 main {

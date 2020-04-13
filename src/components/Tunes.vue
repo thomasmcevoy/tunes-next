@@ -10,55 +10,57 @@
         </div>
       </li>
     </ul>
-    <Seekbar :markers="markers" />
+    <Seekbar :markers="markers()" />
   </div>
 </template>
 
 <script>
+import { useStore } from 'vuex'
+import { reactive, computed } from 'vue'
 import Tune from './Tune.vue'
 import Seekbar from './Seekbar.vue'
-import { mapActions, mapGetters, mapState } from 'vuex'
 
 export default {
-  name: 'Tunes',
   components: {
     Tune,
     Seekbar
   },
-  methods: {
-    ...mapActions(['setMarkers']),
-    getMarker (tune) {
-      if (this.sortBy === 'Year') {
+  setup () {
+    const store = useStore()
+    const state = reactive({
+      sortBy: computed(() => store.state.sortBy),
+      currentRoute: computed(() => store.state.currentRoute),
+      sortedFilteredTunes: computed(() => store.getters.sortedFilteredTunes),
+      groupedTunes: computed(() => getGroupedTunes())
+    })
+
+    const getMarker = tune => {
+      if (state.sortBy === 'Year') {
         if (tune.year < 1900) return '< 1900'
         else return String(tune.year).slice(0, -1).concat('0s')
       } else {
-        const char = tune[this.sortBy.toLowerCase()][0]
+        const char = tune[state.sortBy.toLowerCase()][0]
         if ('0123456789'.includes(char)) return '#'
         else return char
       }
     }
-  },
-  computed: {
-    ...mapGetters(['sortedFilteredTunes']),
-    ...mapState({
-      sortBy: state => state.sortBy,
-      currentRoute: state => state.currentRoute
-    }),
-    markers () {
+
+    const markers = () => {
       const result = []
-      this.sortedFilteredTunes.forEach(tune => {
-        const currentMarker = this.getMarker(tune)
+      state.sortedFilteredTunes.forEach(tune => {
+        const currentMarker = getMarker(tune)
         if (result.indexOf(currentMarker) === -1) {
           result.push(currentMarker)
         }
       })
       return result
-    },
-    groupedTunes () {
+    }
+
+    const getGroupedTunes = () => {
       const result = []
       let currentMarker = ''
-      this.sortedFilteredTunes.forEach(tune => {
-        const marker = this.getMarker(tune)
+      state.sortedFilteredTunes.forEach(tune => {
+        const marker = getMarker(tune)
         if (marker !== currentMarker) {
           currentMarker = marker
           result.push({
@@ -69,6 +71,15 @@ export default {
         result[result.length - 1].tunes.push(tune)
       })
       return result
+    }
+
+    return {
+      sortBy: computed(() => state.sortBy),
+      currentRoute: computed(() => state.currentRoute),
+      sortedFilteredTunes: computed(() => state.sortedFilteredTunes),
+      groupedTunes: computed(() => state.groupedTunes),
+      getMarker,
+      markers
     }
   }
 }

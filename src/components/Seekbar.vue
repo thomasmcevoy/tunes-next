@@ -19,75 +19,79 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { useStore } from 'vuex'
+import { reactive, computed, watchEffect } from 'vue'
 
 export default {
-  name: 'Seekbar',
   props: {
     markers: Array
   },
-  data () {
-    return {
+  setup (props, context) {
+    const store = useStore()
+    const state = reactive({
+      sortBy: computed(() => store.state.sortBy),
+      toggleSelected: computed(() => store.actions.toggleSelected),
+      sortedFilteredTunes: computed(() => store.getters.sortedFilteredTunes),
+      lastTarget: '',
       isVisible: false,
-      lastTarget: ''
-    }
-  },
-  computed: {
-    ...mapGetters(['sortedFilteredTunes']),
-    ...mapState({
-      sortBy: state => state.sortBy
-    }),
-    seekbarNode () {
-      return document.getElementById('seekbar-container')
-    },
-    seekbarTopOffset () {
-      return Math.floor(this.seekbarNode.getBoundingClientRect().top)
-    },
-    seekbarHeight () {
-      return this.seekbarNode.clientHeight
-    },
-    headerHeight () {
-      return document.getElementsByTagName('header')[0].clientHeight
-    },
-    markerHeight () {
-      return this.seekbarHeight / this.markers.length
-    },
-    viewportHeight () {
-      return Math.max(
-        document.documentElement.clientHeight,
-        window.innerHeight || 0
-      )
-    }
-  },
-  methods: {
-    ...mapActions(['toggleSelected']),
-    shorten (marker) {
-      if (this.sortBy !== 'Year') {
-        return marker
-      } else if (marker === '< 1900') {
-        return '<'
-      } else {
-        return marker.slice(2, -1)
+      seekbarNode: undefined,
+      seekbarHeight: undefined,
+      seekbarTopOffset: undefined,
+      headerHeight: undefined,
+      markerHeight: undefined,
+      viewportHeight: undefined
+    })
+
+    watchEffect(() => {
+      const headerNode = document.getElementsByTagName('header')[0]
+      const seekbarNode = document.getElementById('seekbar-container')
+      console.log('watchEffect', seekbarNode)
+
+      state.seekbarNode = seekbarNode
+      if (seekbarNode) {
+        state.seekbarHeight = seekbarNode.clientHeight
+        state.seekbarTopOffset = Math.floor(seekbarNode.getBoundingClientRect().top)
+        state.headerHeight = headerNode.clientHeight
+        state.markerHeight = seekbarNode.clientHeight / props.markers.length
+        state.viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
       }
-    },
-    handlePan (e) {
+    })
+
+    const shorten = marker => {
+      if (state.sortBy !== 'Year') return marker
+      else if (marker === '< 1900') return '<'
+      else return marker.slice(2, -1)
+    }
+
+    const handlePan = e => {
       e.preventDefault()
-      const touchPosition = e.center.y - this.seekbarTopOffset
-      const touchedMarkerIndex = Math.floor(touchPosition / this.markerHeight)
-      const targetNode = document.getElementById(
-        this.markers[touchedMarkerIndex]
-      )
-      const targetOffset = targetNode.offsetTop - this.headerHeight
-      if (targetNode !== this.lastTarget && !this.timeout) {
+
+      const touchPosition = e.center.y - state.seekbarTopOffset
+      const touchedMarkerIndex = Math.floor(touchPosition / state.markerHeight)
+      const targetNode = document.getElementById(props.markers[touchedMarkerIndex])
+      const targetOffset = targetNode.offsetTop - state.headerHeight
+
+      if (targetNode !== state.lastTarget) {
         window.scrollTo(0, targetOffset)
-        this.lastTarget = targetNode
+        state.lastTarget = targetNode
       }
-    },
-    handlePanStart () {
-      this.isVisible = true
-    },
-    handlePanEnd () {
-      this.isVisible = false
+    }
+
+    const handlePanStart = () => {
+      state.isVisible = true
+    }
+
+    const handlePanEnd = () => {
+      state.isVisible = false
+    }
+
+    return {
+      seekbarNode: computed(() => state.seekbarHeight),
+      isVisible: computed(() => state.isVisible),
+      shorten,
+      handlePan,
+      handlePanStart,
+      handlePanEnd
     }
   }
 }
