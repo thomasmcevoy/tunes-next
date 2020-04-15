@@ -1,17 +1,15 @@
 <template>
-  <Menu />
   <Header />
   <main>
-    <Random />
-    <Tunes />
-    <Setlist />
+    <Random v-if="currentRoute === 'Random'" />
+    <Tunes v-if="currentRoute === 'Tunes'" />
+    <Setlist v-if="currentRoute === 'Setlist'" />
   </main>
 </template>
 
 <script>
 import { useStore } from 'vuex'
-import { onMounted } from 'vue'
-import Menu from './components/Menu.vue'
+import { computed } from 'vue'
 import Header from './components/Header.vue'
 import Random from './components/Random.vue'
 import Tunes from './components/Tunes.vue'
@@ -19,7 +17,6 @@ import Setlist from './components/Setlist.vue'
 
 export default {
   components: {
-    Menu,
     Header,
     Random,
     Tunes,
@@ -28,9 +25,11 @@ export default {
   setup () {
     const store = useStore()
 
-    onMounted(() => {
-      store.dispatch('loadTunes')
-    })
+    store.dispatch('onLoad')
+
+    return {
+      currentRoute: computed(() => store.state.currentRoute)
+    }
   }
 }
 </script>

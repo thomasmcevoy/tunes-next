@@ -1,5 +1,5 @@
 <template>
-  <div id="random" v-if="currentRoute === 'Random'">
+  <div id="random">
     <div id="stack">
       <div
         class="current tune"
@@ -7,8 +7,8 @@
         v-hammer:pan="onPan"
         v-hammer:panend="onPanEnd"
       >
-        <div class="title">{{ currentTune.title }}</div>
-        <div class="detail">{{ currentTune.composer }} ({{ currentTune.year }})</div>
+        <div class="title">{{ tunes[0].title }}</div>
+        <div class="detail">{{ tunes[0].composer }} ({{ tunes[0].year }})</div>
       </div>
       <!-- <div class="next tune">
         <div class="title">{{ tunes[1].title }}</div>
@@ -21,7 +21,7 @@
 
 <script>
 import { useStore } from 'vuex'
-import { computed, reactive, ref, onMounted, watch, watchEffect } from 'vue'
+import { computed, reactive, onMounted, watchEffect, toRefs } from 'vue'
 // import { TweenLite } from "gsap";
 
 const shuffle = tunes => {
@@ -37,25 +37,20 @@ export default {
   setup () {
     const store = useStore()
     const state = reactive({
-      currentRoute: computed(() => store.state.currentRoute),
       filteredTunes: computed(() => store.getters.filteredTunes),
-      shuffledtunes: [],
+      tunes: [],
       discarded: [],
       style: {
         top: '0',
         left: '0'
       }
     })
-    const currentTune = ref(null)
 
     watchEffect(() => {
       state.tunes = shuffle(state.filteredTunes)
-      currentTune.value = state.tunes[0]
-      // state.currentTune = state.tunes[0]
     })
 
     onMounted(() => {
-      console.log('currentTune: ', currentTune.value)
       console.log('state.tunes[0]: ', state.tunes[0])
     })
 
@@ -101,16 +96,10 @@ export default {
     }
 
     return {
-      currentRoute: computed(() => state.currentRoute),
-      discarded: computed(() => state.discarded),
-      tunes: computed(() => state.tunes),
-      style: computed(() => state.style),
-      currentTune,
+      ...toRefs(state),
       onPan,
       onPanEnd,
-      goBack,
-      watch,
-      ref
+      goBack
     }
   }
 

@@ -25,8 +25,7 @@ export default {
   methods: {
     ...mapActions(['addToSetlist', 'removeFromSetlist']),
     toggleSelected (tune) {
-      const index = this.setlist.indexOf(tune)
-      if (index === -1) {
+      if (this.setlist.indexOf(tune) === -1) {
         this.addToSetlist(tune)
       } else {
         this.removeFromSetlist(tune)

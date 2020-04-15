@@ -1,23 +1,31 @@
 <template>
-  <div id="setlist" ref="setlist" v-if="currentRoute === 'Setlist'">
-    <ul v-for="setlistTune in setlist" :key="setlistTune.title">
-      <SetlistTune :tune="setlistTune" :scrollLock="scrollLock" :scrollUnlock="scrollUnlock" />
+  <div id="setlist" ref="setlist">
+    <ul
+      v-for="setlistTune in setlist"
+      :key="setlistTune.title"
+    >
+      <SetlistTune
+        :tune="setlistTune"
+        :scrollLock="scrollLock"
+        :scrollUnlock="scrollUnlock"
+      />
     </ul>
   </div>
 </template>
 
 <script>
 import { useStore } from 'vuex'
-import { computed, reactive } from 'vue'
+import { ref, onMounted } from 'vue'
 import SetlistTune from './SetlistTune.vue'
 
 export default {
   components: { SetlistTune },
   setup () {
     const store = useStore()
-    const state = reactive({
-      setlist: computed(() => store.state.setlist),
-      currentRoute: computed(() => store.state.currentRoute)
+    const setlist = ref(store.state.setlist)
+
+    onMounted(() => {
+      console.log(this.$refs)
     })
 
     const scrollLock = () => {
@@ -35,8 +43,7 @@ export default {
     }
 
     return {
-      currentRoute: computed(() => state.currentRoute),
-      setlist: computed(() => state.setlist),
+      setlist,
       scrollLock,
       scrollUnlock
     }

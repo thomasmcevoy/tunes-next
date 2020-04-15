@@ -1,16 +1,15 @@
 export const FILTERS = {
   all: 'All',
-  selected: 'Selected',
-  latin: 'Latin',
+  standards: 'Standards',
+  jazz: 'Jazz tunes',
   blues: 'Blues',
-  minor: 'Minor',
-  waltzes: 'Waltzes',
-  ballads: 'Ballads',
-  holiday: 'Holiday',
-  contrafacts: 'Contrafacts',
   rhythm: 'Rhythm',
+  contrafacts: 'Contrafacts',
+  ballads: 'Ballads',
+  waltzes: 'Waltzes',
+  latin: 'Latin',
+  minor: 'Minor',
   miles: 'Miles',
   sinatra: 'Sinatra',
-  standards: 'Standards',
-  jazz: 'Jazz tunes'
+  holiday: 'Holiday'
 }

@@ -1,35 +1,36 @@
 <template>
+  <Menu :isOpen="isOpen" v-on:closeMenu="closeMenu" />
   <header>
     <div id="router">
-      <a v-bind:class="{ active: currentRoute === 'Random' }" @click="handleClick('Random')">RANDOM</a>
-      <a v-bind:class="{ active: currentRoute === 'Tunes' }" @click="handleClick('Tunes')">TUNES</a>
-      <a v-bind:class="{ active: currentRoute === 'Setlist' }" @click="handleClick('Setlist')">SETLIST</a>
+      <a v-bind:class="{ active: currentRoute === 'Random' }" @click="setRoute('Random')">RANDOM</a>
+      <a v-bind:class="{ active: currentRoute === 'Tunes' }" @click="setRoute('Tunes')">TUNES</a>
+      <a v-bind:class="{ active: currentRoute === 'Setlist' }" @click="setRoute('Setlist')">SETLIST</a>
     </div>
-    <div class="menu-button" @click="openMenu()">lll</div>
-    <!-- ☰</div> -->
-    <!-- <svg class="menu-button" viewBox="0 0 26 26" @click="openMenu()">
-      <path
-        d="M 0 4 L 0 6 L 26 6 L 26 4 Z M 0 12 L 0 14 L 26 14 L 26 12 Z M 0 20 L 0 22 L 26 22 L 26 20 Z "
-      />
-    </svg>-->
+    <div class="menu-button" @click="openMenu">lll</div>
   </header>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { useStore } from 'vuex'
+import { ref, computed } from 'vue'
+import Menu from './Menu'
 
 export default {
-  name: 'Header',
-  methods: {
-    ...mapActions(['setRoute', 'openMenu']),
-    handleClick (route) {
-      this.setRoute(route)
+  components: { Menu },
+  setup () {
+    const store = useStore()
+    const isOpen = ref(false)
+    const openMenu = () => { isOpen.value = true }
+    const closeMenu = () => { isOpen.value = false }
+    const setRoute = route => { store.dispatch('setRoute', route) }
+
+    return {
+      isOpen,
+      openMenu,
+      closeMenu,
+      setRoute,
+      currentRoute: computed(() => store.state.currentRoute)
     }
-  },
-  computed: {
-    ...mapState({
-      currentRoute: state => state.currentRoute
-    })
   }
 }
 </script>

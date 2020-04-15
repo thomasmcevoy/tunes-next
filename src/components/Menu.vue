@@ -1,58 +1,63 @@
 <template>
-  <div id="menu" v-bind:class="{ isOpen: menuIsOpen }" v-hammer:swipe.up="closeMenu">
-    <div class="menu-button" @click="closeMenu()">×</div>
+  <div id="menu" v-bind:class="{ isOpen: isOpen }" v-hammer:swipe.up="closeMenu">
+    <div class="menu-button" @click="closeMenu">×</div>
     <section>
       <h2>Sort</h2>
       <ul>
-        <MenuItemSort :sortBy="sortBy" v-bind:key="sortBy" v-for="sortBy in sortBys" />
+        <MenuItem
+          v-for="item in sortBys"
+          v-bind:key="item"
+          :item="item"
+          :activeItem="sortedBy"
+          :action="setSortBy"
+        />
       </ul>
     </section>
     <section>
       <h2>Filter</h2>
       <ul>
-        <MenuItemFilter :filter="filter" v-bind:key="filter" v-for="filter in filters" />
+        <MenuItem
+          v-for="item in filters"
+          v-bind:key="item"
+          :item="item"
+          :activeItem="filteredBy"
+          :action="setFilter"
+        />
       </ul>
     </section>
   </div>
 </template>
 
 <script>
-import MenuItemFilter from './MenuItemFilter.vue'
-import MenuItemSort from './MenuItemSort.vue'
+import MenuItem from './MenuItem.vue'
 import { mapActions, mapState } from 'vuex'
+import { FILTERS } from '../constants/filters'
+import { SORTBYS } from '../constants/sortBys'
 
 export default {
   name: 'Menu',
   components: {
-    MenuItemSort,
-    MenuItemFilter
+    MenuItem
+  },
+  props: {
+    isOpen: Boolean
   },
   methods: {
-    ...mapActions(['toggleMenu', 'closeMenu'])
+    ...mapActions(['setSortBy', 'setFilter']),
+    closeMenu () {
+      this.$emit('closeMenu')
+    }
   },
   computed: {
     ...mapState({
-      menuIsOpen: state => state.menuIsOpen
+      sortedBy: state => state.sortBy,
+      filteredBy: state => state.filter
     })
   },
   data () {
     return {
-      sortBys: ['Title', 'Composer', 'Year'],
-      filters: [
-        'All',
-        'Jazz tunes',
-        'Standards',
-        'Blues',
-        'Rhythm',
-        'Ballads',
-        'Waltzes',
-        'Latin',
-        'Contrafacts',
-        'Minor',
-        'Miles',
-        'Sinatra',
-        'Holiday'
-      ]
+      sortBys: Object.values(SORTBYS),
+      filters: Object.values(FILTERS)
     }
   }
 }
