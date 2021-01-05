@@ -10,7 +10,7 @@
     "predeploy": "npm run build"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "gh-pages": "^2.2.0",
     "gsap": "^3.2.6",
